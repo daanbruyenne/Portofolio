@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio B — Daan Bruyenne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    /* --- BASE & TYPOGRAFIE --- */
+    :root {
+      --bg-color: #fcfcfc;
+      --text-color: #1a1a1a;
+      --muted-color: #666666;
+      --border-color: #e5e5e5;
+      --accent-color: #000000;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --max-width: 1140px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      background-color: #f0f0f0;
+    }
+
+    /* --- NAVIGATIE --- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      background-color: rgba(252, 252, 252, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      z-index: 100;
+    }
+
+    .logo a {
+      font-family: var(--font-sans);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      font-size: 1.1rem;
+    }
+
+    .site-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+    }
+
+    .site-nav a {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+      transition: color 0.2s ease;
+    }
+
+    .site-nav a:hover {
+      color: var(--accent-color);
+    }
+
+    /* --- MAIN LAYOUT --- */
+    main {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .hero-section {
+      padding: 6rem 0 4rem 0;
+    }
+
+    .main-title {
+      font-family: var(--font-sans);
+      font-size: 3.5rem;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+
+    .subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--muted-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-text {
+      font-size: 1.1rem;
+      max-width: 600px;
+      color: #333;
+      margin-bottom: 4rem;
+    }
+
+    /* --- PORTFOLIO GRID (HOME) --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .image-container {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      margin-bottom: 1rem;
+      background-color: #eee;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.02);
+    }
+
+    .category {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-color);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-info h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-info p {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+    }
+
+    /* --- SECTIES ALGEMEEN --- */
+    .content-section {
+      padding: 6rem 0;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-desc {
+      color: var(--muted-color);
+      font-size: 0.95rem;
+    }
+
+    /* --- THEATER & FILM LIJSTEN --- */
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .project-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 2rem;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .year {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+    }
+
+    .badge, .status-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid var(--border-color);
+      border-radius: 2px;
+    }
+
+    .status-tag.released {
+      background-color: #f0f0f0;
+    }
+
+    .status-tag.in-dev {
+      border-style: dashed;
+    }
+
+    .project-details h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .credits {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+      margin-bottom: 0.8rem;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .media-gallery.single-col {
+      grid-template-columns: 1fr;
+      max-width: 650px;
+    }
+
+    /* --- GRAPHIC DESIGN & HORECA GRIDS --- */
+    .design-grid, .horeca-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .design-card img, .horeca-card img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+
+    .design-info h4, .horeca-info h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .design-info p, .horeca-info p {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .tools {
+      font-size: 0.75rem;
+      color: #888;
+      display: block;
+    }
+
+    /* --- FLEXIBLE GRID (PROJECTEN) --- */
+    .flexible-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .flex-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      background-color: #fff;
+    }
+
+    .flex-card h3 {
+      font-size: 1.1rem;
+      margin: 0.5rem 0 0.2rem 0;
+    }
+
+    .flex-card p {
+      font-size: 0.88rem;
+      color: var(--muted-color);
+      margin-top: 0.5rem;
+    }
+
+    /* --- ABOUT SECTION --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-image img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .about-text h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .about-text .lead {
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .about-text p {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact-container {
+      max-width: 600px;
+    }
+
+    .contact-container h2 {
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-container > p {
+      color: var(--muted-color);
+      margin-bottom: 2rem;
+    }
+
+    .contact-details {
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-details a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-color);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--border-color);
+      background-color: transparent;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    .submit-btn {
+      padding: 0.9rem 1.8rem;
+      background-color: var(--accent-color);
+      color: #fff;
+      border: none;
+      font-family: inherit;
+      font-size: 0.88rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.2s ease;
+    }
+
+    .submit-btn:hover {
+      opacity: 0.85;
+    }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted-color);
+      margin-top: 4rem;
+    }
+
+    /* --- RESPONSIVE / MOBILE DESIGN --- */
+    @media (max-width: 768px) {
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.2rem 1.5rem;
+      }
+
+      .site-nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      main {
+        padding: 0 1.2rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem;
+      }
+
+      .project-item {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigatie -->
+  <header class="site-header">
+    <div class="logo">
+      <a href="#home">STUDIO B</a>
+    </div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#theater">Theater & Musical</a></li>
+        <li><a href="#film">Film</a></li>
+        <li><a href="#design">Graphic Design</a></li>
+        <li><a href="#horeca">Horeca</a></li>
+        <li><a href="#projecten">Projecten</a></li>
+        <li><a href="#about">Over mij</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-content">
+        <h1 class="main-title">STUDIO B</h1>
+        <p class="subtitle">Creative work by Daan Bruyenne</p>
+        <p class="intro-text">
+          Studio B is een verzameling van mijn werk, ideeën en projecten. Van theater en musical tot film, graphic design, horeca en alles daartussen.
+        </p>
+      </div>
+      
+      <!-- Visuele Selectie / Grid -->
+      <div class="portfolio-grid">
+        <article class="project-card">
+          <div class="image-container">
+            <img src="placeholders/theater-1.jpg" alt="Musical Productie Placeholder">
+          </div>
+          <div class="project-info">
+            <span class="category">Theater & Musical</span>
+            <h3>Musicals & Podiumwerk</h3>
+            <p>2Dance Academy, The Singing Factory, Supastar & JongKracht</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="image-container">
+            <img src="placeholders/film-1.jpg" alt="Filmproject Placeholder">
+          </div>
+          <div class="project-info">
+            <span class="category">Film</span>
+            <h3>Kortfilm & Concepten</h3>
+            <p>Scripts, drafts & visuals in ontwikkeling</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="image-container">
+            <img src="placeholders/design-1.jpg" alt="Brand Identity Placeholder">
+          </div>
+          <div class="project-info">
+            <span class="category">Graphic Design</span>
+            <h3>Branding & Poster Design</h3>
+            <p>Visuele identiteiten, posters & promomateriaal</p>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="image-container">
+            <img src="placeholders/horeca-1.jpg" alt="Culinaire Creatie Placeholder">
+          </div>
+          <div class="project-info">
+            <span class="category">Horeca</span>
+            <h3>Horeca-concepten & Food Styling</h3>
+            <p>Culinaire creaties, menu-ontwerpen & masterproef</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Theater & Musical Section -->
+    <section id="theater" class="content-section">
+      <div class="section-header">
+        <h2>Theater & Musical</h2>
+        <p class="section-desc">Ervaring op en rond het podium: voorstellingen, rollen, scripts en eigen concepten.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project-item">
+          <div class="project-meta">
+            <span class="year">2025</span>
+            <span class="badge">Productie</span>
+          </div>
+          <div class="project-details">
+            <h3>Musicalproducties</h3>
+            <p class="credits"><strong>Producties:</strong> The Singing Factory, 2Dance Academy, Supastar, JongKracht</p>
+            <p class="description">Een overzicht van rollen, personages en podiumervaring door de jaren heen. Inclusief foto's van voorstellingen en achter de schermen.</p>
+            <div class="media-gallery">
+              <div class="media-item"><img src="placeholders/theater-show-1.jpg" alt="Voorstelling foto"></div>
+              <div class="media-item"><img src="placeholders/theater-poster-1.jpg" alt="Programmaboekje/Poster"></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-item">
+          <div class="project-meta">
+            <span class="year">2026</span>
+            <span class="badge">In ontwikkeling</span>
+          </div>
+          <div class="project-details">
+            <h3>One-Man-Show & Eigen Scripts</h3>
+            <p class="credits"><strong>Rol:</strong> Bedenker / Auteur / Performer</p>
+            <p class="description">Eigen theaterteksten, concepten en voorbereidingen voor solovoorstellingen.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Film Section -->
+    <section id="film" class="content-section">
+      <div class="section-header">
+        <h2>Film</h2>
+        <p class="section-desc">Kortfilms, filmstills, storyboards en creatieve ideeën in diverse stadia van uitwerking.</p>
+      </div>
+
+      <div class="project-list">
+        <article class="project-item">
+          <div class="project-meta">
+            <span class="year">2025</span>
+            <span class="status-tag released">Released</span>
+          </div>
+          <div class="project-details">
+            <h3>Kortfilm Project I</h3>
+            <p class="credits"><strong>Rol:</strong> Regie / Script / Edit</p>
+            <p class="description">Afgewerkte kortfilm. Bekijk hier de filmstills, het posterontwerp en de behind-the-scenes fotoreportage.</p>
+            <div class="media-gallery single-col">
+              <img src="placeholders/film-still-1.jpg" alt="Filmstill">
+            </div>
+          </div>
+        </article>
+
+        <article class="project-item">
+          <div class="project-meta">
+            <span class="year">2026</span>
+            <span class="status-tag in-dev">In development</span>
+          </div>
+          <div class="project-details">
+            <h3>Filmconcept & Storyboards</h3>
+            <p class="credits"><strong>Rol:</strong> Concept & Scenario</p>
+            <p class="description">Een inkijk in het creatieve proces: eerste scènes, drafts, moodboards en schetsen.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Graphic Design Section -->
+    <section id="design" class="content-section">
+      <div class="section-header">
+        <h2>Graphic Design</h2>
+        <p class="section-desc">Visuele identiteiten, drukwerk, posters, social media ontwerpen en digitale presentaties.</p>
+      </div>
+
+      <div class="design-grid">
+        <div class="design-card">
+          <img src="placeholders/design-brandbook.jpg" alt="Brand Identity & Logo">
+          <div class="design-info">
+            <h4>Brand Identity & Logo Design</h4>
+            <p>Huisstijlen, brandbooks en typografie voor diverse projecten.</p>
+            <span class="tools">Tools: Illustrator, InDesign</span>
+          </div>
+        </div>
+
+        <div class="design-card">
+          <img src="placeholders/design-poster.jpg" alt="Poster & Promomateriaal">
+          <div class="design-info">
+            <h4>Posters & Promomateriaal</h4>
+            <p>Affiches, flyers en programmaboekjes voor voorstellingen en events.</p>
+            <span class="tools">Tools: Photoshop, InDesign</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horeca Section -->
+    <section id="horeca" class="content-section">
+      <div class="section-header">
+        <h2>Horeca</h2>
+        <p class="section-desc">Culinaire creaties, restaurantconcepten, branding en conceptontwikkeling.</p>
+      </div>
+
+      <div class="horeca-grid">
+        <div class="horeca-card">
+          <img src="placeholders/horeca-dish-1.jpg" alt="Culinaire creatie">
+          <div class="horeca-info">
+            <h3>Gerechten & Food Styling</h3>
+            <p>Samenstelling van gerechten, smaakcombinaties en visuele presentatie op het bord.</p>
+          </div>
+        </div>
+
+        <div class="horeca-card">
+          <img src="placeholders/horeca-concept.jpg" alt="Restaurantconcept Masterproef">
+          <div class="horeca-info">
+            <h3>Masterproef & Restaurantconcepten</h3>
+            <p>Totaalconcepten inclusief branding, menu-opbouw, sfeerbeleving en drankencombinaties.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overige Projecten Section -->
+    <section id="projecten" class="content-section">
+      <div class="section-header">
+        <h2>Projecten</h2>
+        <p class="section-desc">Ondernemersideeën, cross-over projecten en losse concepten.</p>
+      </div>
+
+      <div class="flexible-grid">
+        <article class="flex-card">
+          <span class="category">Concept</span>
+          <h3>Creatief Samenwerkingsproject</h3>
+          <span class="year">2026</span>
+          <p>Een interdisciplinair project op het snijvlak van horeca en cultuur.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="content-section about-section">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="placeholders/daan-portrait.jpg" alt="Daan Bruyenne">
+        </div>
+        <div class="about-text">
+          <h2>About me</h2>
+          <p class="lead">Hi, ik ben Daan Bruyenne.</p>
+          <p>
+            Studio B is mijn persoonlijke creatieve speelveld en archief. Ik houd me bezig met verschillende vormen van expressie en ontwerp: van acteren en zingen in musical- en theaterproducties tot het schrijven van filmscripts, het ontwerpen van visuele identiteiten en het bedenken van vernieuwende horecaconcepten.
+          </p>
+          <p>
+            Ik geloof niet dat je jezelf tot één vakgebied hoef te beperken. Voor mij versterken verhalen op de bühne, beelden op een scherm, grafische vormen en de beleving aan tafel elkaar. Studio B is de plek waar al die werelden samenkomen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section contact-section">
+      <div class="contact-container">
+        <h2>Contact</h2>
+        <p>Wil je samenwerken, een idee bespreken of gewoon eens kennismaken?</p>
+        
+        <div class="contact-details">
+          <p><strong>Naam:</strong> Daan Bruyenne / Studio B</p>
+          <p><strong>E-mail:</strong> <a href="mailto:info@studiob.be">info@studiob.be</a></p>
+          <p><strong>Instagram:</strong> <a href="https://instagram.com" target="_blank" rel="noopener">@daan.studiob</a></p>
+        </div>
+
+        <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault();">
+          <div class="form-group">
+            <label for="name">Naam</label>
+            <input type="text" id="name" name="name" required placeholder="Jouw naam">
+          </div>
+          <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" required placeholder="jouw@email.com">
+          </div>
+          <div class="form-group">
+            <label for="message">Bericht</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Typ hier je bericht..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Verstuur bericht</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2026 Studio B — Daan Bruyenne. Alle rechten voorbehouden.</p>
+  </footer>
+
+</body>
+</html>
